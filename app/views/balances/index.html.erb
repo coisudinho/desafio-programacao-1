@@ -1,0 +1,39 @@
+
+		<section>
+			<div>
+				<h1>Balances</h1>
+				<%= form_tag({controller: :balances, action: :upload}, :multipart => true) do %>
+					<div>
+						<%= label_tag :file_name, "Select File", id: :file %>
+						<%= file_field :attachment, :filename, id: :file_name %>
+						<%= text_field_tag "balance[description]", nil, placeholder: :description.capitalize %>
+						<input type="submit" value="Upload" />
+					</div>
+				<% end %><!-- 
+		-->	</div>
+
+			<% if @balances.blank? %>
+			<h2>No balances found</h2>
+			<% else %>
+			<table>
+				<thead>
+					<tr>
+						<th>Description</th>
+						<th>Total</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<td><%= @balances.count %> Entries</td>
+						<td>Total: <%= @balances.total %></td>
+					</tr>
+				</tfoot>
+				<tbody><% @balances.each do |balance| %>
+					<tr>
+						<td><%= link_to balance.description, balance %></td>
+						<td><%= balance.total %></td>
+					</tr><% end %>
+				</tbody>
+			</table>
+			<% end %>
+		</section>

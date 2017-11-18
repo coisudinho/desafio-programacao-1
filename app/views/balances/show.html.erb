@@ -1,0 +1,36 @@
+
+		<section>
+			<div>
+				<h1><%= link_to "Balances", balances_path %> / <%= @balance.description %> / Entries</h1>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th><%= :purchaser_name.capitalize %></th>
+						<th><%= :item_description.capitalize %></th>
+						<th><%= :item_price.capitalize %></th>
+						<th><%= :purchase_count.capitalize %></th>
+						<th><%= :merchant_address.capitalize %></th>
+						<th><%= :merchant_name.capitalize %></th>
+						
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<td><%= @balance.entries.count %> Entries</td>
+						<td>Total: </td>
+						<td><%= @balance.entries.total %> </td>
+					</tr>
+				</tfoot>
+				<tbody><% @balance.entries.each do |entry| %>
+					<tr>
+						<td><%= entry.purchaser_name %></td>
+						<td><%= entry.item_description %></td>
+						<td><%= entry.item_price %></td>
+						<td><%= entry.purchase_count %></td>
+						<td><%= entry.merchant_address %></td>
+						<td><%= entry.merchant_name %></td>
+					</tr><% end %>
+				</tbody>
+			</table>
+		</section>
